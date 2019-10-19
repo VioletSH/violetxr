@@ -108,6 +108,8 @@
           :selectionState="
             this.contenido ? 3 : this.actividad ? 2 : this.modulo ? 1 : 0
           "
+          :contentModel="this.contenido?(this.contenido.peticion.url1?this.contenido.peticion.url1:this.contenido.peticion.url):null"
+          :contentAudio="this.contenido?(this.contenido.peticion.url2?this.contenido.peticion.url2:null):null"
         />
         <!-- Sugerencia -->
         <a-marker
@@ -162,7 +164,7 @@
             :text="module.nombre"
             class="modulo"
             :customDataEvent="module"
-            color="#882277"
+            color="#4d2066"
             :current="modulo ? modulo.nombre : ''"
             :model="'glb/marker/' + (i + 1) + '.glb'"
           />
@@ -188,6 +190,8 @@
             "
           />
         </template>
+        <!-- Test -->
+        <ArTest/>
       </a-entity>
     </a-scene>
     <button id="log-out" @click="logout" class="vxr-button">Salir</button>
@@ -198,6 +202,7 @@
 import { setTimeout } from "timers";
 import ArMarkerOption from "../components/ArMarkerOption";
 import ArMarkerCenter from "../components/ArMarkerCenter";
+import ArTest from "../components/ArTest";
 
 export default {
   name: "ArScene",
@@ -220,7 +225,8 @@ export default {
   },
   components: {
     ArMarkerOption,
-    ArMarkerCenter
+    ArMarkerCenter,
+    ArTest
   },
   mounted: function() {
     //Display instruction for 2 seconds
@@ -243,14 +249,23 @@ export default {
           this.modulo = this.curso.modulos.filter(x => x.id === data.id)[0];
         } else if (type == "actividad") {
           this.actividad = data;
+          this.contenido = data.contenidos[0]
         } else if (type == "sugerencia") {
           this.actividad = data;
+          this.contenido = data.contenidos[0]
         }
       } else {
         if (type == "modulo") {
           this.modulo = null;
+          this.actividad = null;
+          this.contenido = null;
         } else if (type == "actividad") {
           this.actividad = null;
+          this.contenido = null
+        }
+        else if (type == "sugerencia") {
+          this.actividad = null;
+          this.contenido = null
         }
       }
     });

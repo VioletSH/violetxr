@@ -153,6 +153,62 @@ AFRAME.registerComponent("play-audio", {
   }
 });
 //Vue Instance
+AFRAME.registerComponent("test-right-to-left", {
+  schema: {
+    nextMarker: { type: "selector" },
+    travelObject: { type: "selector" }
+  },
+  init: function(){
+  },
+  tick: function() {
+    if(this.el.classList.contains('done')&&!this.el.object3D.visible){
+      this.data.travelObject.object3D.visible = false;
+    }
+    if(this.data.nextMarker){
+      var currentPosition = this.el.object3D.position;
+      var nextPosition = this.data.nextMarker.object3D.position;
+      var distance = currentPosition.distanceTo(nextPosition);
+      if(this.el.object3D.visible && this.el.classList.contains('done')){
+        this.data.travelObject.object3D.position.copy(this.el.object3D.position)
+        this.data.travelObject.object3D.visible = true;
+      }
+      if(this.data.nextMarker.object3D.visible&&this.el.object3D.visible&&distance&&distance<1.5&& this.el.classList.contains('done')){
+        if(!this.el.classList.contains('ready')){
+          this.startedTime = Date.now();
+          this.el.classList.add('ready');
+        }
+        if(this.el.classList.contains('done')){
+          let p = this.parabolicPath( this.el.object3D.getWorldPosition(), this.data.nextMarker.object3D.getWorldPosition(), ((Date.now()-this.startedTime+(5*1000))/1000) % 4 - 1 );
+          this.data.travelObject.object3D.position.copy( p );
+          if(nextPosition.distanceTo(p)<=0.1){
+            this.markAsDone();
+          }
+        }
+      }
+      else{
+        this.el.classList.remove('ready');
+      }
+    }
+  },
+  parabolaEvaluate: function(p0, p1, p2, t){
+    return ( 0.5*(p0 - 2*p1 + p2) )*t*t + ( -0.5*(3*p0 - 4*p1 + p2) )*t + ( p0 );
+  },
+  parabolicPath: function( pointStart, pointEnd, time )
+  {
+    let pointMiddle = new THREE.Vector3().addVectors( pointStart, pointEnd ).multiplyScalar(0.5).add( new THREE.Vector3(0,2,0) );
+    return new THREE.Vector3(
+      this.parabolaEvaluate( pointStart.x, pointMiddle.x, pointEnd.x, time ),
+      this.parabolaEvaluate( pointStart.y, pointMiddle.y, pointEnd.y, time ),
+      this.parabolaEvaluate( pointStart.z, pointMiddle.z, pointEnd.z, time )
+    );	
+  },
+  markAsDone: function(){
+    this.el.classList.remove('done')
+    this.data.nextMarker.classList.add('done')
+    this.el.emit('test-item-done')
+  }
+});
+
 new Vue({
   router,
   render: h => h(App)

@@ -6,6 +6,29 @@
       position="0.089 2.643 0.809"
       rotation="300 0 0"
     ></a-entity>
+        <!-- Base -->
+    <!-- <a-entity
+      v-if="!contentResource"
+      gltf-model="glb/base2.glb"
+      scale="0.25 0.25 0.25"
+      position="0 0 0"
+    ></a-entity> -->
+    <!-- <template v-if="!this.modelLoaded && this.displayLoader">
+      <a-entity
+        id="load"
+        rotation="0 0 0"
+        position="0 0.25 0"
+        geometry="primitive: dodecahedron; radius: 0.5"
+        material="color:#ffffff;opacity:0.25;shader:flat"
+      >
+      <a-entity
+        gltf-model="glb/loading.glb"
+        animation-mixer
+        scale="0.25 0.25 0.25"
+        position="-0.325 0.2 0"
+      ></a-entity>
+      </a-entity>
+    </template> -->
     <!-- Violet -->    
     <a-entity
       v-if="selectionState == 0"
@@ -13,7 +36,7 @@
       scale="1 1 1"
       position="0.163 0.084 -0.454"
       rotation="0 180 0"
-      animation-mixer="timeScale:1"
+      animation-mixer="timeScale:0"
       ref="originModel"
     ></a-entity>
     <a-entity
@@ -22,51 +45,40 @@
       scale="1 1 1"
       position="0.163 0.084 -0.454"
       rotation="0 180 0"
-      animation-mixer="timeScale:1"
+      animation-mixer="timeScale:0"
       ref="originModel"
     ></a-entity>
     <a-entity
-      v-else-if="selectionState == 2"
-      gltf-model="glb/Violet/d5.glb"
+      v-else-if="selectionState ==2"
+      gltf-model="glb/Violet/d4.glb"
       scale="1 1 1"
       position="0.163 0.084 -0.454"
       rotation="0 180 0"
-      animation-mixer="timeScale:1"
+      animation-mixer="timeScale:0"
       ref="originModel"
     ></a-entity>
     <!-- content -->
     <a-entity
-      v-if="selectionState == 3 && contentModel"
-      :gltf-model="this.contentModel"
+      v-else-if="selectionState == 3 && contentResource"
+      :gltf-model="this.contentResource"
       scale="0.25 0.25 0.25"
       position="-0.1 0.095 0.4"
-      animation-mixer="timeScale:1;"
+      animation-mixer="timeScale:0;"
       ref="originModel"
     ></a-entity>
-    <!-- Base -->
+    <!-- test -->
     <a-entity
-      v-if="!contentModel"
-      gltf-model="glb/base2.glb"
-      scale="0.25 0.25 0.25"
+      v-else-if="selectionState == 4 && contentType=='model/gltf+json'"
+      animation-mixer
+    >
+     <a-entity
+      geometry="primitive: cylinder; segmentsRadial: 6; segmentsHeight: 1;height: 0.1"
+      scale=""
+      rotation="0 90 0"
       position="0 0 0"
-    ></a-entity>
-    <!-- <template v-if="!this.modelLoaded">
-      <a-entity
-        id="load"
-        rotation="0 0 0"
-        position="0 0.25 0"
-        geometry="primitive: dodecahedron; radius: 0.5"
-        material="color:#ffffff;opacity:0.25;shader:flat"
-      >
-        <a-entity
-          gltf-model="glb/loading.glb"
-          animation-mixer
-          scale="0.25 0.25 0.25"
-          position="-0.325 0.2 0"
-        ></a-entity>
-      </a-entity>
-    </template> -->
-
+      draw="background:#666666"
+      textwrap="textAlign: center; x: 128; y: 150; text:Evaluación en curso; color: white;width:200"></a-entity>
+    </a-entity>
     <!--Audios-->
     <audio
       v-if="selectionState == 0"
@@ -80,7 +92,7 @@
     ></audio>
     <audio
       v-else-if="selectionState == 2"
-      src="glb/Violet/Audios/d5.mp3"
+      :src="this.contentAudio"
       ref="audio"
     ></audio>
     <audio
@@ -96,14 +108,16 @@ export default {
   name: "ArMarkerCenter",
   props: {
     id: String,
-    contentModel: String,
+    contentType: String,
+    contentResource: String,
     contentAudio: String,
 
     selectionState: Number
   },
   data: function() {
     return {
-      modelLoaded: false
+      modelLoaded: false,
+      displayLoader: true,
     };
   },
   watch: {
@@ -111,13 +125,25 @@ export default {
       // watch it
       console.log(newVal,oldVal)
       if (newVal != oldVal) {
-        console.log('in')
+        console.log('in2')
+        // if(this.oldVal>=3){
+        //   this.addListeners();
+        //   this.displayLoader=false;
+        // }
         this.$refs.origin.classList.remove("ready");
         this.modelLoaded=false
       }
     }
   },
   mounted: function() {
+    this.addListeners();
+  },
+  updated: function(){
+ 
+  },
+  methods:{
+    addListeners: function(){
+      
     //Load one
     if(this.$refs.origin){
       this.$refs.originModel.addEventListener("model-loaded", () => {
@@ -125,35 +151,44 @@ export default {
         this.$refs.origin.classList.add("ready");
       });
       this.$refs.origin.addEventListener("markerLost", () => {
+        if(this.$refs.audio)
         this.$refs.audio.pause();
+        if(this.$refs.originModel)
         this.$refs.originModel.setAttribute("animation-mixer", "timeScale", "0"); 
       });
       this.$refs.origin.addEventListener("markerFound", () => {
-        this.$refs.originModel.setAttribute("animation-mixer", "timeScale", "1"); 
-        if (
+        if ( this.$refs.audio &&
           this.$refs.audio.currentTime !== this.$refs.audio.duration &&
           this.$refs.origin.classList.contains("ready")
         ) {
           this.$refs.audio.play();
+          if(this.$refs.originModel)
           this.$refs.originModel.setAttribute("animation-mixer", "timeScale", "1"); 
         }
       });
       this.$refs.origin.addEventListener("model-loaded", () => {
+        this.$refs.origin.classList.add("ready")
         if (
           this.$refs.origin.classList.contains("ready") &&
           this.$refs.origin.object3D.visible
         ) {
+        if(this.$refs.audio)
           this.$refs.audio.play();
+        if(this.$refs.originModel)
+          this.$refs.originModel.setAttribute("animation-mixer", "timeScale", "1"); 
         }
       });
     }
     if(this.$refs.audio){
       this.$refs.audio.addEventListener("ended", () => {
-        this.$refs.originModel.setAttribute("animation-mixer", "timeScale", "0"); // The color is blue.
+        if(this.$refs.originModel)
+        this.$refs.originModel.setAttribute("animation-mixer", "timeScale", "0");
       });
       this.$refs.audio.addEventListener("play", () => {
-        this.$refs.originModel.setAttribute("animation-mixer", "timeScale", "1"); // The color is blue.
+        if(this.$refs.originModel)
+        this.$refs.originModel.setAttribute("animation-mixer", "timeScale", "1");
       });
+    }
     }
   }
 };

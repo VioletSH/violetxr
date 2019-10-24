@@ -393,7 +393,7 @@ export default {
                             "/glb/content/telecomunicaciones.glb",
                           url2:
                             "/glb/content/telecomunicaciones.mp3",
-                          tipoContenido: "application/pdf"
+                          tipoContenido: "model/gltf+json"
                         }
                       }
                     ]
@@ -420,7 +420,7 @@ export default {
                           id: 18,
                           url:
                             "https://docs.google.com/forms/d/1OgLAFZKRXKeguUe4MvJJEC4dZa0IzyPkU-UKLOQjeVE/edit?usp=sharing",
-                          tipoContenido: "application/vnd.google-apps.form"
+                          tipoContenido: "model/gltf+json"
                         }
                       }
                     ]

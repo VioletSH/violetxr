@@ -106,9 +106,10 @@
         <ArMarkerCenter
           :id="markerOriginID"
           :selectionState="
-            this.contenido ? 3 : this.actividad ? 2 : this.modulo ? 1 : 0
+            this.contenido ? (this.actividad.nombre.includes('Material') ? 3:4) : this.actividad ? 2 : this.modulo ? 1 : 0
           "
-          :contentModel="this.contenido?(this.contenido.peticion.url1?this.contenido.peticion.url1:this.contenido.peticion.url):null"
+          :contentType="this.contenido?this.contenido.peticion.tipoContenido:''"
+          :contentResource="this.contenido?(this.contenido.peticion.url1?this.contenido.peticion.url1:this.contenido.peticion.url):null"
           :contentAudio="this.contenido?(this.contenido.peticion.url2?this.contenido.peticion.url2:null):null"
         />
         <!-- Sugerencia -->
@@ -191,7 +192,7 @@
           />
         </template>
         <!-- Test -->
-        <ArTest/>
+        <!-- <ArTest v-if="this.contenido?this.contenido.id==18:false"/> -->
       </a-entity>
     </a-scene>
     <button id="log-out" @click="logout" class="vxr-button">Salir</button>

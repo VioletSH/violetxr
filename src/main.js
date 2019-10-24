@@ -13,12 +13,19 @@ import "aframe-particle-system-component";
 Vue.config.productionTip = false;
 
 //Google API
+// const config = {
+//   apiKey: "AIzaSyBzT_ssQdnGLZ0kc0lOgzrfbRThU7CmEDU",
+//   clientId:
+//     "445333639249-m78tmfvlib259sdosq1krtfdgpd1fo2h.apps.googleusercontent.com",
+//   scope:
+//     "profile email https://www.googleapis.com/auth/drive https://www.googleapis.com/auth/drive https://www.googleapis.com/auth/drive https://www.googleapis.com/auth/drive https://www.googleapis.com/auth/drive https://www.googleapis.com/auth/drive https://www.googleapis.com/auth/drive"
+// };
 const config = {
   apiKey: "AIzaSyBzT_ssQdnGLZ0kc0lOgzrfbRThU7CmEDU",
   clientId:
     "445333639249-m78tmfvlib259sdosq1krtfdgpd1fo2h.apps.googleusercontent.com",
   scope:
-    "profile email https://www.googleapis.com/auth/drive https://www.googleapis.com/auth/drive https://www.googleapis.com/auth/drive https://www.googleapis.com/auth/drive https://www.googleapis.com/auth/drive https://www.googleapis.com/auth/drive https://www.googleapis.com/auth/drive"
+    "profile email https://www.googleapis.com/auth/drive.readonly https://www.googleapis.com/auth/drive.metadata.readonly"
 };
 Vue.use(VueGoogleApi, config);
 
@@ -126,30 +133,37 @@ AFRAME.registerComponent("distance-event", {
     }
   }
 });
-AFRAME.registerComponent("play-audio", {
-  schema: {
-    audio: { type: "selector" }
-  },
-  init: function() {
-    this.el.addEventListener("markerLost", () => {
-      this.data.audio.pause();
-    });
-    this.el.addEventListener("markerFound", () => {
-      if (
-        this.data.audio.currentTime !== this.data.audio.duration &&
-        this.el.classList.contains("ready")
-      ) {
-        this.data.audio.play();
-      }
-    });
-    this.el.addEventListener("model-loaded", () => {
-      if (this.el.classList.contains("ready")) {
-        this.data.audio.play();
-      }
-    });
-  },
-  tick: function() {
-    //console.log(this.data.audio.currentTime,this.data.audio.duration)
+// AFRAME.registerComponent("play-audio", {
+//   schema: {
+//     audio: { type: "selector" }
+//   },
+//   init: function() {
+//     this.el.addEventListener("markerLost", () => {
+//       this.data.audio.pause();
+//     });
+//     this.el.addEventListener("markerFound", () => {
+//       if (
+//         this.data.audio.currentTime !== this.data.audio.duration &&
+//         this.el.classList.contains("ready")
+//       ) {
+//         this.data.audio.play();
+//       }
+//     });
+//     this.el.addEventListener("model-loaded", () => {
+//       if (this.el.classList.contains("ready")) {
+//         this.data.audio.play();
+//       }
+//     });
+//   },
+//   tick: function() {
+//     //console.log(this.data.audio.currentTime,this.data.audio.duration)
+//   }
+// });
+AFRAME.registerComponent("render-event",{
+  init:function(){
+    this.el.object3D.onBeforeRender = () =>{
+      console.log('rendered')
+    }
   }
 });
 //Vue Instance

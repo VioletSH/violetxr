@@ -192,7 +192,7 @@
           />
         </template>
         <!-- Test -->
-        <!-- <ArTest v-if="this.contenido?this.contenido.id==18:false"/> -->
+        <ArTest v-if="this.contenido?this.contenido.id==18:false"/>
       </a-entity>
     </a-scene>
     <button id="log-out" @click="logout" class="vxr-button">Salir</button>
@@ -204,9 +204,15 @@ import { setTimeout } from "timers";
 import ArMarkerOption from "../components/ArMarkerOption";
 import ArMarkerCenter from "../components/ArMarkerCenter";
 import ArTest from "../components/ArTest";
-
+import ArContent from "../components/ArContent"; //Temporal
 export default {
   name: "ArScene",
+  components: {
+    ArMarkerOption,
+    ArMarkerCenter,
+    ArTest,
+    ArContent
+  },
   props: {
     user: Object,
     data: Object
@@ -223,11 +229,6 @@ export default {
       currentInstruction: 1,
       totalInstructions: 7
     };
-  },
-  components: {
-    ArMarkerOption,
-    ArMarkerCenter,
-    ArTest
   },
   mounted: function() {
     //Display instruction for 2 seconds

@@ -1,5 +1,4 @@
 <template>
-  <!-- play-audio="audio: #audio1" -->
   <a-marker preset="hiro" keep-object :id="id" ref="origin">
     <a-entity
       light="type: spot; angle: 45; intensity: 5"
@@ -7,13 +6,13 @@
       rotation="300 0 0"
     ></a-entity>
         <!-- Base -->
-    <!-- <a-entity
+    <a-entity
       v-if="!contentResource"
       gltf-model="glb/base2.glb"
       scale="0.25 0.25 0.25"
       position="0 0 0"
-    ></a-entity> -->
-    <!-- <template v-if="!this.modelLoaded && this.displayLoader">
+    ></a-entity> 
+    <template v-if="(!this.modelLoaded && this.displayLoader) && this.selectionState!=3 && this.selectionState!=4">
       <a-entity
         id="load"
         rotation="0 0 0"
@@ -28,7 +27,7 @@
         position="-0.325 0.2 0"
       ></a-entity>
       </a-entity>
-    </template> -->
+    </template>
     <!-- Violet -->    
     <a-entity
       v-if="selectionState == 0"
@@ -57,15 +56,17 @@
       animation-mixer="timeScale:0"
       ref="originModel"
     ></a-entity>
-    <!-- content -->
+    <!-- content GLTF -->
     <a-entity
-      v-else-if="selectionState == 3 && contentResource"
+      v-else-if="selectionState == 3 && contentResource && contentType=='model/gltf+json'"
       :gltf-model="this.contentResource"
       scale="0.25 0.25 0.25"
       position="-0.1 0.095 0.4"
       animation-mixer="timeScale:0;"
       ref="originModel"
     ></a-entity>
+    <!-- Handle another type of resources -->
+        <ArContent v-else-if="selectionState == 3 && contentResource && contentType" :content="this.contentResource" :type="this.contentType" />
     <!-- test -->
     <a-entity
       v-else-if="selectionState == 4 && contentType=='model/gltf+json'"
@@ -104,8 +105,12 @@
 </template>
 
 <script>
+import ArContent from "./ArContent"
 export default {
   name: "ArMarkerCenter",
+  components:{
+    ArContent,
+  },
   props: {
     id: String,
     contentType: String,
@@ -125,11 +130,9 @@ export default {
       // watch it
       console.log(newVal,oldVal)
       if (newVal != oldVal) {
-        console.log('in2')
-        // if(this.oldVal>=3){
-        //   this.addListeners();
-        //   this.displayLoader=false;
-        // }
+        if(this.oldVal>=3){
+          this.displayLoader=false;
+        }
         this.$refs.origin.classList.remove("ready");
         this.modelLoaded=false
       }

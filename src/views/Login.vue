@@ -434,7 +434,23 @@ export default {
                     descripcion:
                       "Material de estudio sobre Telecomunicaciones - Elementos Físico y Enlace de datos",
                     modulo: 4,
-                    contenidos: []
+                    contenidos: [
+                      {
+                        createdAt: 1566244512350,
+                        updatedAt: 1566244512350,
+                        id: 74532541,
+                        tipoRespuesta: "",
+                        actividad: 20,
+                        peticion: {
+                          createdAt: 1566244512283,
+                          updatedAt: 1566244512283,
+                          id: 5434532,
+                          url:
+                            "https://drive.google.com/open?id=1OPflFXJIcem-PFAXgteBTyEYrUWBb2bt",
+                          tipoContenido: "image/png"
+                        }
+                      }
+                    ] 
                   },
                   {
                     createdAt: 1566244497516,
@@ -456,7 +472,23 @@ export default {
                     descripcion:
                       "Material de estudio sobre Telecomunicaciones - Elementos Transporte y Red",
                     modulo: 4,
-                    contenidos: []
+                    contenidos: [
+                      {
+                        createdAt: 1566244512350,
+                        updatedAt: 1566244512350,
+                        id: 1234567,
+                        tipoRespuesta: "",
+                        actividad: 21,
+                        peticion: {
+                          createdAt: 1566244512283,
+                          updatedAt: 1566244512283,
+                          id: 1237453645,
+                          url:
+                            "https://drive.google.com/file/d/1UX1AcfgvOblKLxIf9aLQtFwg8MdSamYq/view?usp=sharing",
+                          tipoContenido: "video/mp4"
+                        }
+                      }
+                    ]
                   },
                   {
                     createdAt: 1566244497582,

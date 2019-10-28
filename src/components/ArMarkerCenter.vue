@@ -1,7 +1,7 @@
 <template>
-  <a-marker preset="hiro" keep-object :id="id" ref="origin">
+  <a-marker type="barcode" value=0 keep-object :id="id" ref="origin">
     <a-entity
-      light="type: spot; angle: 45; intensity: 5"
+      light="type: spot; angle: 60; intensity: 5"
       position="0.089 2.643 0.809"
       rotation="300 0 0"
     ></a-entity>
@@ -12,7 +12,7 @@
       scale="0.25 0.25 0.25"
       position="0 0 0"
     ></a-entity> 
-    <template v-if="(!this.modelLoaded && this.displayLoader) && this.selectionState!=3 && this.selectionState!=4">
+    <template v-if="(!this.modelLoaded)">
       <a-entity
         id="load"
         rotation="0 0 0"
@@ -20,16 +20,17 @@
         geometry="primitive: dodecahedron; radius: 0.5"
         material="color:#ffffff;opacity:0.25;shader:flat"
       >
+      </a-entity>
       <a-entity
         gltf-model="glb/loading.glb"
         animation-mixer
         scale="0.25 0.25 0.25"
-        position="-0.325 0.2 0"
+        position="-0.325 0.45 0"
       ></a-entity>
-      </a-entity>
     </template>
     <!-- Violet -->    
     <a-entity
+      class="content"
       v-if="selectionState == 0"
       gltf-model="glb/Violet/d1.glb"
       scale="1 1 1"
@@ -39,6 +40,7 @@
       ref="originModel"
     ></a-entity>
     <a-entity
+      class="content"
       v-else-if="selectionState == 1"
       gltf-model="glb/Violet/d4.glb"
       scale="1 1 1"
@@ -48,6 +50,7 @@
       ref="originModel"
     ></a-entity>
     <a-entity
+      class="content"
       v-else-if="selectionState ==2"
       gltf-model="glb/Violet/d4.glb"
       scale="1 1 1"
@@ -58,6 +61,7 @@
     ></a-entity>
     <!-- content GLTF -->
     <a-entity
+      class="content"
       v-else-if="selectionState == 3 && contentResource && contentType=='model/gltf+json'"
       :gltf-model="this.contentResource"
       scale="0.25 0.25 0.25"
@@ -69,6 +73,7 @@
         <ArContent v-else-if="selectionState == 3 && contentResource && contentType" :content="this.contentResource" :type="this.contentType" />
     <!-- test -->
     <a-entity
+      class="content"
       v-else-if="selectionState == 4 && contentType=='model/gltf+json'"
       animation-mixer
     >
@@ -122,7 +127,6 @@ export default {
   data: function() {
     return {
       modelLoaded: false,
-      displayLoader: true,
     };
   },
   watch: {
@@ -130,9 +134,6 @@ export default {
       // watch it
       console.log(newVal,oldVal)
       if (newVal != oldVal) {
-        if(this.oldVal>=3){
-          this.displayLoader=false;
-        }
         this.$refs.origin.classList.remove("ready");
         this.modelLoaded=false
       }
@@ -149,10 +150,6 @@ export default {
       
     //Load one
     if(this.$refs.origin){
-      this.$refs.originModel.addEventListener("model-loaded", () => {
-        this.modelLoaded = true;
-        this.$refs.origin.classList.add("ready");
-      });
       this.$refs.origin.addEventListener("markerLost", () => {
         if(this.$refs.audio)
         this.$refs.audio.pause();
@@ -169,16 +166,19 @@ export default {
           this.$refs.originModel.setAttribute("animation-mixer", "timeScale", "1"); 
         }
       });
-      this.$refs.origin.addEventListener("model-loaded", () => {
-        this.$refs.origin.classList.add("ready")
-        if (
-          this.$refs.origin.classList.contains("ready") &&
-          this.$refs.origin.object3D.visible
-        ) {
-        if(this.$refs.audio)
-          this.$refs.audio.play();
-        if(this.$refs.originModel)
-          this.$refs.originModel.setAttribute("animation-mixer", "timeScale", "1"); 
+      this.$refs.origin.addEventListener("model-loaded", (e) => {
+        if(e.srcElement.classList.contains('content')){
+          this.modelLoaded = true;
+          this.$refs.origin.classList.add("ready")
+          if (
+            this.$refs.origin.classList.contains("ready") &&
+            this.$refs.origin.object3D.visible
+          ) {
+          if(this.$refs.audio)
+            this.$refs.audio.play();
+          if(this.$refs.originModel)
+            this.$refs.originModel.setAttribute("animation-mixer", "timeScale", "1"); 
+          }
         }
       });
     }
@@ -192,7 +192,7 @@ export default {
         this.$refs.originModel.setAttribute("animation-mixer", "timeScale", "1");
       });
     }
-    }
+    },
   }
 };
 </script>

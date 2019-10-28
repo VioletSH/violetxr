@@ -114,7 +114,7 @@
         />
         <!-- Sugerencia -->
         <a-marker
-          preset="kanji"
+          type="barcode" value=19
           keep-object
           v-if="this.sugerencia"
           class="sugerencia"
@@ -161,7 +161,7 @@
             :markerOriginID="markerOriginID"
             :key="module.id + 'M'"
             v-for="(module, i) in curso.modulos"
-            :marker="i"
+            :marker="i+1"
             :text="module.nombre"
             class="modulo"
             :customDataEvent="module"
@@ -176,7 +176,7 @@
             :markerOriginID="markerOriginID"
             :key="i + 'A'"
             v-for="(activity, i) in this.modulo.actividades"
-            :marker="i + 10"
+            :marker="i + 7"
             :text="activity.nombre"
             class="actividad"
             :customDataEvent="activity"

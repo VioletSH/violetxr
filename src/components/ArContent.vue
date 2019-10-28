@@ -1,5 +1,5 @@
 <template>
-  <a-entity>
+  <a-entity ref="contentEntity" class="content">
       <!-- Google -->
       <template v-if="ready&&googleContent">
           <template v-if="googleContentType==='application/pdf'&&htmlElementiD">
@@ -36,7 +36,6 @@
       </template>
   </a-entity>
 </template>
-
 <script>
 import pdf from 'vue-pdf'
 
@@ -69,11 +68,16 @@ export default {
                     console.log(response);
                     this.googleContentType=response.headers['Content-Type'];
                     this.googleContent = response.body;
-                    this.$emit('model-loaded',{});
+                    console.log('dispatching Event')
+                    this.$refs.contentEntity.addEventListener('model-loaded',(e)=>{
+                        console.log(e)
+                    })
+                    console.log(this.$refs.contentEntity.dispatchEvent(new CustomEvent('model-loaded',{"bubbles":true, "cancelable":false})))
                 })
             }
             else{
                 console.log('No file id match')
+                this.$refs.contentEntity.dispatchEvent(new CustomEvent('model-loaded',{"bubbles":true, "cancelable":false}))
             }
         }
         else{
@@ -98,9 +102,7 @@ export default {
     },
     beforeDestroy: function(){
         if(this.$refs.arVideo){
-            console.dir(this.$refs.arVideo)
             this.$refs.arVideo.pause()
-            this.$refs.arVideo.mute()
         }
     }
 }

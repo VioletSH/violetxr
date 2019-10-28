@@ -308,226 +308,63 @@ export default {
                       }
                     ]
                   },
-                  {
-                    createdAt: 1566244497066,
-                    updatedAt: 1566244497066,
-                    id: 9,
-                    nombre: "Material: Hardware - Elemento GPU",
-                    descripcion:
-                      "Material de estudio sobre Hardware - Elemento GPU",
-                    modulo: 2,
-                    contenidos: [
-                      {
-                        createdAt: 1566244511865,
-                        updatedAt: 1566244511865,
-                        id: 9,
-                        tipoRespuesta: "",
-                        actividad: 9,
-                        peticion: {
-                          createdAt: 1566244511830,
-                          updatedAt: 1566244511830,
-                          id: 9,
-                          url:
-                            "https://drive.google.com/file/d/1KBN7KFNTZwYmYcswbQVSefupEw7H1DRm/view?usp=sharing",
-                          tipoContenido: "application/pdf"
-                        }
-                      }
-                    ]
-                  },
-                  {
-                    createdAt: 1566244497104,
-                    updatedAt: 1566244497104,
-                    id: 10,
-                    nombre: "Evaluación: Hardware - Elemento GPU",
-                    descripcion:
-                      "Prueba de evaluación sobre el material de estudio: Hardware - Elemento GPU",
-                    modulo: 2,
-                    contenidos: [
-                      {
-                        createdAt: 1566244511915,
-                        updatedAt: 1566244511915,
-                        id: 10,
-                        tipoRespuesta: "application/vnd.google-apps.form",
-                        actividad: 10,
-                        peticion: {
-                          createdAt: 1566244511892,
-                          updatedAt: 1566244511892,
-                          id: 10,
-                          url:
-                            "https://docs.google.com/forms/d/1i9ly6acB-0A7nEui1r_182sk57RDiTd2vxptY5heHl0/edit?usp=sharing",
-                          tipoContenido: "application/vnd.google-apps.form"
-                        }
-                      }
-                    ]
-                  }
+                  // {
+                  //   createdAt: 1566244497066,
+                  //   updatedAt: 1566244497066,
+                  //   id: 9,
+                  //   nombre: "Material: Hardware - Elemento GPU",
+                  //   descripcion:
+                  //     "Material de estudio sobre Hardware - Elemento GPU",
+                  //   modulo: 2,
+                  //   contenidos: [
+                  //     {
+                  //       createdAt: 1566244511865,
+                  //       updatedAt: 1566244511865,
+                  //       id: 9,
+                  //       tipoRespuesta: "",
+                  //       actividad: 9,
+                  //       peticion: {
+                  //         createdAt: 1566244511830,
+                  //         updatedAt: 1566244511830,
+                  //         id: 9,
+                  //         url:
+                  //           "https://drive.google.com/file/d/1KBN7KFNTZwYmYcswbQVSefupEw7H1DRm/view?usp=sharing",
+                  //         tipoContenido: "application/pdf"
+                  //       }
+                  //     }
+                  //   ]
+                  // },
+                  // {
+                  //   createdAt: 1566244497104,
+                  //   updatedAt: 1566244497104,
+                  //   id: 10,
+                  //   nombre: "Evaluación: Hardware - Elemento GPU",
+                  //   descripcion:
+                  //     "Prueba de evaluación sobre el material de estudio: Hardware - Elemento GPU",
+                  //   modulo: 2,
+                  //   contenidos: [
+                  //     {
+                  //       createdAt: 1566244511915,
+                  //       updatedAt: 1566244511915,
+                  //       id: 10,
+                  //       tipoRespuesta: "application/vnd.google-apps.form",
+                  //       actividad: 10,
+                  //       peticion: {
+                  //         createdAt: 1566244511892,
+                  //         updatedAt: 1566244511892,
+                  //         id: 10,
+                  //         url:
+                  //           "https://docs.google.com/forms/d/1i9ly6acB-0A7nEui1r_182sk57RDiTd2vxptY5heHl0/edit?usp=sharing",
+                  //         tipoContenido: "application/vnd.google-apps.form"
+                  //       }
+                  //     }
+                  //   ]
+                  // }
                 ],
                 createdAt: 1566244496570,
                 updatedAt: 1566244496570,
                 id: 2,
                 nombre: "Hardware",
-                curso: 1
-              },
-              {
-                actividades: [
-                  {
-                    createdAt: 1566244497364,
-                    updatedAt: 1566244497364,
-                    id: 17,
-                    nombre:
-                      "Material: Telecomunicaciones en un Sistema Multimedia",
-                    descripcion:
-                      "Material de estudio sobre Telecomunicaciones en un Sistema Multimedia",
-                    modulo: 4,
-                    contenidos: [
-                      {
-                        createdAt: 1566244512302,
-                        updatedAt: 1566244512302,
-                        id: 17,
-                        tipoRespuesta: "",
-                        actividad: 17,
-                        peticion: {
-                          createdAt: 1566244512283,
-                          updatedAt: 1566244512283,
-                          id: 17,
-                          url1:
-                            "/glb/content/telecomunicaciones.glb",
-                          url2:
-                            "/glb/content/telecomunicaciones.mp3",
-                          tipoContenido: "model/gltf+json"
-                        }
-                      }
-                    ]
-                  },
-                  {
-                    createdAt: 1566244497404,
-                    updatedAt: 1566244497404,
-                    id: 18,
-                    nombre:
-                      "Evaluación: Telecomunicaciones en un Sistema Multimedia",
-                    descripcion:
-                      "Prueba de evaluación sobre el material de estudio: Telecomunicaciones en un Sistema Multimedia",
-                    modulo: 4,
-                    contenidos: [
-                      {
-                        createdAt: 1566244512350,
-                        updatedAt: 1566244512350,
-                        id: 18,
-                        tipoRespuesta: "application/vnd.google-apps.form",
-                        actividad: 18,
-                        peticion: {
-                          createdAt: 1566244512328,
-                          updatedAt: 1566244512328,
-                          id: 18,
-                          url:
-                            "https://docs.google.com/forms/d/1OgLAFZKRXKeguUe4MvJJEC4dZa0IzyPkU-UKLOQjeVE/edit?usp=sharing",
-                          tipoContenido: "model/gltf+json"
-                        }
-                      }
-                    ]
-                  },
-                  {
-                    createdAt: 1566244497480,
-                    updatedAt: 1566244497480,
-                    id: 19,
-                    nombre:
-                      "Material: Telecomunicaciones - Elementos Físico y Enlace de datos",
-                    descripcion:
-                      "Material de estudio sobre Telecomunicaciones - Elementos Físico y Enlace de datos",
-                    modulo: 4,
-                    contenidos: [
-                      {
-                        createdAt: 1566244512350,
-                        updatedAt: 1566244512350,
-                        id: 74532541,
-                        tipoRespuesta: "",
-                        actividad: 20,
-                        peticion: {
-                          createdAt: 1566244512283,
-                          updatedAt: 1566244512283,
-                          id: 5434532,
-                          url:
-                            "https://drive.google.com/open?id=1OPflFXJIcem-PFAXgteBTyEYrUWBb2bt",
-                          tipoContenido: "image/png"
-                        }
-                      }
-                    ] 
-                  },
-                  {
-                    createdAt: 1566244497516,
-                    updatedAt: 1566244497516,
-                    id: 20,
-                    nombre:
-                      "Evaluación: Telecomunicaciones - Elementos Físico y Enlace de datos",
-                    descripcion:
-                      "Prueba de evaluación sobre el material de estudio: Telecomunicaciones - Elementos Físico y Enlace de datos",
-                    modulo: 4,
-                    contenidos: []
-                  },
-                  {
-                    createdAt: 1566244497547,
-                    updatedAt: 1566244497547,
-                    id: 21,
-                    nombre:
-                      "Material: Telecomunicaciones - Elementos Transporte y Red",
-                    descripcion:
-                      "Material de estudio sobre Telecomunicaciones - Elementos Transporte y Red",
-                    modulo: 4,
-                    contenidos: [
-                      {
-                        createdAt: 1566244512350,
-                        updatedAt: 1566244512350,
-                        id: 1234567,
-                        tipoRespuesta: "",
-                        actividad: 21,
-                        peticion: {
-                          createdAt: 1566244512283,
-                          updatedAt: 1566244512283,
-                          id: 1237453645,
-                          url:
-                            "https://drive.google.com/file/d/1UX1AcfgvOblKLxIf9aLQtFwg8MdSamYq/view?usp=sharing",
-                          tipoContenido: "video/mp4"
-                        }
-                      }
-                    ]
-                  },
-                  {
-                    createdAt: 1566244497582,
-                    updatedAt: 1566244497582,
-                    id: 22,
-                    nombre:
-                      "Evaluación: Telecomunicaciones - Elementos Red y Transporte",
-                    descripcion:
-                      "Prueba de evaluación sobre el material de estudio: Telecomunicaciones - Elementos Red y Transporte",
-                    modulo: 4,
-                    contenidos: []
-                  },
-                  {
-                    createdAt: 1566244497623,
-                    updatedAt: 1566244497623,
-                    id: 23,
-                    nombre:
-                      "Material: Telecomunicaciones - Elementos Sesión, Presentación y Aplicación",
-                    descripcion:
-                      "Material de estudio sobre Telecomunicaciones - Elementos Sesión, Presentación y Aplicación",
-                    modulo: 4,
-                    contenidos: []
-                  },
-                  {
-                    createdAt: 1566244497660,
-                    updatedAt: 1566244497660,
-                    id: 24,
-                    nombre:
-                      "Evaluación: Telecomunicaciones - Elementos Sesión, Presentación y Aplicación",
-                    descripcion:
-                      "Prueba de evaluación sobre el material de estudio: Elementos Sesión, Presentación y Aplicación",
-                    modulo: 4,
-                    contenidos: []
-                  }
-                ],
-                createdAt: 1566244496648,
-                updatedAt: 1566244496648,
-                id: 4,
-                nombre: "Telecomunicaciones",
                 curso: 1
               },
               {
@@ -693,6 +530,169 @@ export default {
                 updatedAt: 1566244496611,
                 id: 3,
                 nombre: "Software",
+                curso: 1
+              },
+              {
+                actividades: [
+                  {
+                    createdAt: 1566244497364,
+                    updatedAt: 1566244497364,
+                    id: 17,
+                    nombre:
+                      "Material: Telecomunicaciones en un Sistema Multimedia",
+                    descripcion:
+                      "Material de estudio sobre Telecomunicaciones en un Sistema Multimedia",
+                    modulo: 4,
+                    contenidos: [
+                      {
+                        createdAt: 1566244512302,
+                        updatedAt: 1566244512302,
+                        id: 17,
+                        tipoRespuesta: "",
+                        actividad: 17,
+                        peticion: {
+                          createdAt: 1566244512283,
+                          updatedAt: 1566244512283,
+                          id: 17,
+                          url1:
+                            "/glb/content/telecomunicaciones.glb",
+                          url2:
+                            "/glb/content/telecomunicaciones.mp3",
+                          tipoContenido: "model/gltf+json"
+                        }
+                      }
+                    ]
+                  },
+                  {
+                    createdAt: 1566244497404,
+                    updatedAt: 1566244497404,
+                    id: 18,
+                    nombre:
+                      "Evaluación: Telecomunicaciones en un Sistema Multimedia",
+                    descripcion:
+                      "Prueba de evaluación sobre el material de estudio: Telecomunicaciones en un Sistema Multimedia",
+                    modulo: 4,
+                    contenidos: [
+                      {
+                        createdAt: 1566244512350,
+                        updatedAt: 1566244512350,
+                        id: 18,
+                        tipoRespuesta: "application/vnd.google-apps.form",
+                        actividad: 18,
+                        peticion: {
+                          createdAt: 1566244512328,
+                          updatedAt: 1566244512328,
+                          id: 18,
+                          url:
+                            "https://docs.google.com/forms/d/1OgLAFZKRXKeguUe4MvJJEC4dZa0IzyPkU-UKLOQjeVE/edit?usp=sharing",
+                          tipoContenido: "model/gltf+json"
+                        }
+                      }
+                    ]
+                  },
+                  {
+                    createdAt: 1566244497480,
+                    updatedAt: 1566244497480,
+                    id: 19,
+                    nombre:
+                      "Material: Telecomunicaciones - Elementos Físico y Enlace de datos",
+                    descripcion:
+                      "Material de estudio sobre Telecomunicaciones - Elementos Físico y Enlace de datos",
+                    modulo: 4,
+                    contenidos: [
+                      {
+                        createdAt: 1566244512350,
+                        updatedAt: 1566244512350,
+                        id: 74532541,
+                        tipoRespuesta: "",
+                        actividad: 20,
+                        peticion: {
+                          createdAt: 1566244512283,
+                          updatedAt: 1566244512283,
+                          id: 5434532,
+                          url:
+                            "https://drive.google.com/open?id=1OPflFXJIcem-PFAXgteBTyEYrUWBb2bt",
+                          tipoContenido: "image/png"
+                        }
+                      }
+                    ] 
+                  },
+                  // {
+                  //   createdAt: 1566244497516,
+                  //   updatedAt: 1566244497516,
+                  //   id: 20,
+                  //   nombre:
+                  //     "Evaluación: Telecomunicaciones - Elementos Físico y Enlace de datos",
+                  //   descripcion:
+                  //     "Prueba de evaluación sobre el material de estudio: Telecomunicaciones - Elementos Físico y Enlace de datos",
+                  //   modulo: 4,
+                  //   contenidos: []
+                  // },
+                  {
+                    createdAt: 1566244497547,
+                    updatedAt: 1566244497547,
+                    id: 21,
+                    nombre:
+                      "Material: Telecomunicaciones - Elementos Transporte y Red",
+                    descripcion:
+                      "Material de estudio sobre Telecomunicaciones - Elementos Transporte y Red",
+                    modulo: 4,
+                    contenidos: [
+                      {
+                        createdAt: 1566244512350,
+                        updatedAt: 1566244512350,
+                        id: 1234567,
+                        tipoRespuesta: "",
+                        actividad: 21,
+                        peticion: {
+                          createdAt: 1566244512283,
+                          updatedAt: 1566244512283,
+                          id: 1237453645,
+                          url:
+                            "https://drive.google.com/file/d/1UX1AcfgvOblKLxIf9aLQtFwg8MdSamYq/view?usp=sharing",
+                          tipoContenido: "video/mp4"
+                        }
+                      }
+                    ]
+                  },
+                  // {
+                  //   createdAt: 1566244497582,
+                  //   updatedAt: 1566244497582,
+                  //   id: 22,
+                  //   nombre:
+                  //     "Evaluación: Telecomunicaciones - Elementos Red y Transporte",
+                  //   descripcion:
+                  //     "Prueba de evaluación sobre el material de estudio: Telecomunicaciones - Elementos Red y Transporte",
+                  //   modulo: 4,
+                  //   contenidos: []
+                  // },
+                  {
+                    createdAt: 1566244497623,
+                    updatedAt: 1566244497623,
+                    id: 23,
+                    nombre:
+                      "Material: Telecomunicaciones - Elementos Sesión, Presentación y Aplicación",
+                    descripcion:
+                      "Material de estudio sobre Telecomunicaciones - Elementos Sesión, Presentación y Aplicación",
+                    modulo: 4,
+                    contenidos: []
+                  },
+                  // {
+                  //   createdAt: 1566244497660,
+                  //   updatedAt: 1566244497660,
+                  //   id: 24,
+                  //   nombre:
+                  //     "Evaluación: Telecomunicaciones - Elementos Sesión, Presentación y Aplicación",
+                  //   descripcion:
+                  //     "Prueba de evaluación sobre el material de estudio: Elementos Sesión, Presentación y Aplicación",
+                  //   modulo: 4,
+                  //   contenidos: []
+                  // }
+                ],
+                createdAt: 1566244496648,
+                updatedAt: 1566244496648,
+                id: 4,
+                nombre: "Telecomunicaciones",
                 curso: 1
               }
             ],

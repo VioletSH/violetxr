@@ -4,7 +4,7 @@
       v-for="(option,index) in this.randomList(options)"
       :key="index+'MT'"
       type="barcode"
-      :value="index+5"
+      :value="index+13"
       keep-object
       ref="markers"
       :class="option.order==1?'done':''"

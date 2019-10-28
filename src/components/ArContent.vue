@@ -8,14 +8,24 @@
                 <pdf :src="{data:googleContent}" @page-loaded="this.fitView" ref="pdf"/>
              </div>
             </div>
-            <a-entity geometry="primitive: plane; height: 1.25; width: 2.22222222222" rotation="-90 0 0" material="shader: html; target: #htmlElementiD; fps:1; ratio:width;"></a-entity>
+            <a-entity geometry="primitive: plane; height: 1.25; width: 2.22222222222" rotation="-90 0 0" material="shader: html; target: #htmlElementiD; fps:1; ratio:width;">
+            </a-entity>
           </template>
           <template v-else-if="googleContentType==='image/bmp'||googleContentType==='image/jpeg'||googleContentType==='image/tiff'||googleContentType==='image/png'">
             <a-image :src="encodeFile(googleContent,googleContentType)" rotation="-90 0 0"></a-image>
           </template>
-          <template v-if="googleContentType==='video/x-flv'||googleContentType==='video/mp4'||googleContentType==='video/quicktime'||googleContentType==='video/x-msvideo'||googleContentType==='video/x-ms-wmv'||googleContentType==='video/ogg'">
+          <template v-else-if="googleContentType==='video/x-flv'||googleContentType==='video/mp4'||googleContentType==='video/quicktime'||googleContentType==='video/x-msvideo'||googleContentType==='video/x-ms-wmv'||googleContentType==='video/ogg'">
             <video :src="encodeFile(googleContent,googleContentType)" :id="htmlElementiD" autoplay></video>
             <a-video ref="arVideo" :src="'#'+htmlElementiD" rotation="-90 0 0"></a-video>
+          </template>
+          <template v-else>
+            <a-entity
+            geometry="primitive: cylinder; segmentsRadial: 6; segmentsHeight: 1;height: 0.1"
+            scale=""
+            rotation="0 90 0"
+            position="0 0 0"
+            draw="background:#666666"
+            textwrap="textAlign: center; x: 128; y: 150; text:Formato no soportado, has clic en la pantalla para redirigirte al sitio; color: white;width:200"></a-entity>
           </template>
       </template >
       <!-- Standard Urls -->
@@ -33,6 +43,15 @@
             </div>
             <a-entity geometry="primitive: plane; height: 1.25; width: 2.22222222222" rotation="-90 0 0" material="shader: html; target: #htmlElementiD; fps:1; ratio:width;"></a-entity>
         </template>
+        <template v-else>
+            <a-entity
+            geometry="primitive: cylinder; segmentsRadial: 6; segmentsHeight: 1;height: 0.1"
+            scale=""
+            rotation="0 90 0"
+            position="0 0 0"
+            draw="background:#666666"
+            textwrap="textAlign: center; x: 128; y: 150; text:Formato no soportado, has clic en la pantalla para redirigirte al sitio; color: white;width:200"></a-entity>
+          </template>
       </template>
   </a-entity>
 </template>

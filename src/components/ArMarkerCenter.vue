@@ -12,7 +12,7 @@
       scale="0.25 0.25 0.25"
       position="0 0 0"
     ></a-entity> 
-    <template v-if="(!this.modelLoaded)">
+    <template v-if="(!this.modelLoaded) && this.selectionState!=4">
       <a-entity
         id="load"
         rotation="0 0 0"
@@ -84,6 +84,20 @@
       position="0 0 0"
       draw="background:#666666"
       textwrap="textAlign: center; x: 128; y: 150; text:Evaluación en curso; color: white;width:200"></a-entity>
+    </a-entity>
+    
+    <a-entity
+      class="content"
+      v-else-if="selectionState == 4 && !(contentType=='model/gltf+json')"
+      animation-mixer
+    >
+     <a-entity
+      geometry="primitive: cylinder; segmentsRadial: 6; segmentsHeight: 1;height: 0.1"
+      scale=""
+      rotation="0 90 0"
+      position="0 0 0"
+      draw="background:#666666"
+      textwrap="textAlign: center; x: 128; y: 128; text:Evaluación Externa, has clic en la pantalla para redirigirte al sitio; color: white;width:200"></a-entity>
     </a-entity>
     <!--Audios-->
     <audio

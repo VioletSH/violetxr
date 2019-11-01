@@ -195,7 +195,17 @@
         <ArTest v-if="this.contenido?this.contenido.id==18:false"/>
       </a-entity>
     </a-scene>
-    <button id="log-out" @click="logout" class="vxr-button">Salir</button>
+    <div :class="isModalExit?'darker show fixed':'darker fixed'">
+      <div :class="isModalExit?'modal show':'modal'">
+        <span class="message"> ¿Desea cerrar sesión o salir de la aplicación?</span>
+        <div class="horizontal">
+          <button class="vxr-button" @click="isModalExit=false">Cancelar</button>
+          <button class="vxr-button">Salir</button>
+          <button class="vxr-button" @click="logout">Cerrar Sesión</button>
+        </div>
+      </div>
+    </div>
+    <button id="log-out" class="vxr-button" @click="isModalExit=true">Salir</button>
   </div>
 </template>
 
@@ -227,7 +237,9 @@ export default {
 
       markerOriginID: "markerOrigin",
       currentInstruction: 1,
-      totalInstructions: 7
+      totalInstructions: 7,
+
+      isModalExit: false
     };
   },
   mounted: function() {
@@ -427,5 +439,20 @@ a-scene {
   position: absolute;
   top: 1em;
   left: 1em;
+}
+.fixed{
+    top: 0;
+    left: 0;
+    height: -webkit-fill-available;
+    width: -webkit-fill-available;
+}
+.fixed .modal{
+  padding: 0.75em;
+}
+.horizontal{
+  display: flex;
+  justify-content: space-around;
+  width: 100%;
+  margin-top:0.5em;
 }
 </style>

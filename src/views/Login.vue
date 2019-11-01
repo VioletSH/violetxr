@@ -13,7 +13,7 @@
         >
       </div>
       <div :class="user ? 'darker show' : 'darker'">
-        <div :class="user ? 'user-welcome show' : 'user-welcome'">
+        <div :class="user ? 'modal show' : 'modal'">
           <img v-if="user" :src="user.image" />
           <span v-if="user" class="message"
             >Bienvenido {{ user.firstname }}</span
@@ -810,8 +810,9 @@ export default {
 .show {
   opacity: 1 !important;
   transform: none !important;
+  pointer-events: all;
 }
-.user-welcome {
+.modal {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -828,7 +829,7 @@ export default {
   transition-delay: 0.2s;
   transform: translateY(100vh);
 }
-.user-welcome img {
+.modal img {
   max-width: 8em;
   border-radius: 100%;
 }

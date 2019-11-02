@@ -722,11 +722,28 @@ export default {
             proximaActividad: {
               createdAt: 1566244496771,
               updatedAt: 1566244496771,
-              id: 3,
-              nombre: "Material: Hardware en un Sistema Multimedia",
-              descripcion:
-                "Material de estudio sobre Hardware en un Sistema Multimedia",
-              modulo: 2
+                    id: 1,
+                    nombre: "Material: Introducción a los Sistemas Multimedia",
+                    descripcion:
+                      "Material de estudio sobre Introducción a los Sistemas Multimedia",
+                    modulo: 1,
+                    contenidos: [
+                      {
+                        createdAt: 1566244511443,
+                        updatedAt: 1566244511443,
+                        id: 1,
+                        tipoRespuesta: "",
+                        actividad: 1,
+                        peticion: {
+                          createdAt: 1566244511411,
+                          updatedAt: 1566244511411,
+                          id: 1,
+                          url:
+                            "https://drive.google.com/file/d/1SWPeH0WqXEG2Ahn9Zz20g5dQB_5Nj2CV/view?usp=sharing",
+                          tipoContenido: "application/pdf"
+                        }
+                      }
+                    ]
             }
           }
         ]

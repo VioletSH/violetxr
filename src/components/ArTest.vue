@@ -10,7 +10,12 @@
       :class="option.order==1?'done':''"
       :id="'MT'+option.order"
       :test-right-to-left="'nextMarker:#MT'+(option.order+1)+';travelObject:#travelObject'">
-      <a-entity :gltf-model="option.object" animation-mixer scale="0.25 0.25 0.25"></a-entity>
+      <a-entity
+      light="type: spot; angle: 60; intensity: 5"
+      position="0.089 2.643 0.809"
+      rotation="300 0 0"
+    ></a-entity>
+      <a-entity :gltf-model="option.object" animation-mixer scale="0.25 0.25 0.25" rotation="0 180 0"></a-entity>
     </a-marker>
     <a-entity :gltf-model="travelObject" id="travelObject" scale="0.25 0.25 0.25"></a-entity>
   </a-entity>

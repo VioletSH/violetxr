@@ -25,7 +25,7 @@ const config = {
   clientId:
     "445333639249-m78tmfvlib259sdosq1krtfdgpd1fo2h.apps.googleusercontent.com",
   scope:
-    "profile email https://www.googleapis.com/auth/drive.readonly https://www.googleapis.com/auth/drive.metadata.readonly"
+    "profile email https://www.googleapis.com/auth/drive.readonly https://www.googleapis.com/auth/drive.file  https://www.googleapis.com/auth/drive.metadata.readonly"
 };
 Vue.use(VueGoogleApi, config);
 
@@ -192,7 +192,7 @@ AFRAME.registerComponent("test-right-to-left", {
           this.el.classList.add('ready');
         }
         if(this.el.classList.contains('done')){
-          let p = this.parabolicPath( this.el.object3D.getWorldPosition(), this.data.nextMarker.object3D.getWorldPosition(), ((Date.now()-this.startedTime+(5*1000))/1000) % 4 - 1 );
+          let p = this.parabolicPath( this.el.object3D.position, this.data.nextMarker.object3D.position, ((Date.now()-this.startedTime+(5*1000))/1000) % 4 - 1 );
           this.data.travelObject.object3D.position.copy( p );
           if(nextPosition.distanceTo(p)<=0.1){
             this.markAsDone();

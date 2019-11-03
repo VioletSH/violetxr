@@ -205,6 +205,21 @@
         </div>
       </div>
     </div>
+    <!-- External Link Modal -->
+    <template v-if="this.contenido && this.contenido.peticion.tipoContenido!='model/gltf+json'">
+      <div class="external" @click="isModalExternal=true"></div>
+      <div :class="isModalExternal?'darker show fixed':'darker fixed'">
+        <div :class="isModalExternal?'modal show':'modal'">
+          <span class="message">Está apunto de ser redirigido a un link fuera de la aplicación, ¿desea continuar?</span>
+          <div class="horizontal">
+            <form :action="contenido.peticion.url" class="horizontal">
+              <button class="vxr-button" @click="isModalExternal=false">Cancelar</button>
+              <input class="vxr-button" type="submit" value="Continuar"/>
+            </form>
+          </div>
+        </div>
+      </div>
+    </template>
     <button id="log-out" class="vxr-button" @click="isModalExit=true">Salir</button>
   </div>
 </template>
@@ -239,7 +254,8 @@ export default {
       currentInstruction: 1,
       totalInstructions: 7,
 
-      isModalExit: false
+      isModalExit: false,
+      isModalExternal: false
     };
   },
   mounted: function() {
@@ -454,5 +470,10 @@ a-scene {
   justify-content: space-around;
   width: 100%;
   margin-top:0.5em;
+}
+.external{
+  height: 100%;
+  width: 90%;
+  position: absolute;
 }
 </style>

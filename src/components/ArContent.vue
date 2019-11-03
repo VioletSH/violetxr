@@ -103,6 +103,9 @@ export default {
             this.ready = true
         }
         this.htmlElementiD = (Math.random()).toString(36).substring(7)+'html';
+        //prevent parent body margin, only will work on mobile
+        this.$refs.contentEntity.style.marginTop = -parseFloat(document.body.style.marginTop)+'px'
+        
     },
     methods:{
         fitView:function(){
@@ -135,5 +138,6 @@ export default {
     align-items: flex-start;
     height: 100%;
     opacity: 0;
+    margin-top:  inherit
 }
 </style>

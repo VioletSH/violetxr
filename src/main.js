@@ -25,7 +25,7 @@ const config = {
   clientId:
     "445333639249-m78tmfvlib259sdosq1krtfdgpd1fo2h.apps.googleusercontent.com",
   scope:
-    "profile email https://www.googleapis.com/auth/drive"
+    "profile email https://www.googleapis.com/auth/drive.readonly https://www.googleapis.com/auth/drive.file  https://www.googleapis.com/auth/drive.metadata.readonly"
 };
 Vue.use(VueGoogleApi, config);
 

@@ -58,7 +58,7 @@ AFRAME.registerComponent("keep-object", {
 AFRAME.registerComponent("distance-event", {
   schema: {
     target: { type: "selector" },
-    distance: { type: "number", default: 3 },
+    distance: { type: "number", default: 1.5},
     drawLine: { default: false },
     color1: { default: "#0000ff" },
     color2: { default: "#00ff00" },

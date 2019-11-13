@@ -3,82 +3,62 @@
     <div class="instructions show" ref="instructions">
       <h1>Violet xR</h1>
       <div :class="this.currentInstruction === 1 ? 'desc show' : 'desc'">
+        <span>Existen 5 tipos de marcadores distingibles por color.</span>
         <div class="image-container">
-          <img src="/img/tutorial/vr1.gif" />
-          <img src="/img/tutorial/vr_arrow.gif" />
-          <img width="250" src="/img/tutorial/vr_hmd.png" />
+          <img src="/img/tutorial/markers.png"  style="max-width: 120%; margin: -3em; width: inherit; max-height: none;"/>
         </div>
-        <span
-          >Por favor gira tu celular selecciona el icono
-          <img
-            src="data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%20245.82%20141.73%22%3E%3Cdefs%3E%3Cstyle%3E.a%7Bfill%3A%23fff%3Bfill-rule%3Aevenodd%3B%7D%3C%2Fstyle%3E%3C%2Fdefs%3E%3Ctitle%3Emask%3C%2Ftitle%3E%3Cpath%20class%3D%22a%22%20d%3D%22M175.56%2C111.37c-22.52%2C0-40.77-18.84-40.77-42.07S153%2C27.24%2C175.56%2C27.24s40.77%2C18.84%2C40.77%2C42.07S198.08%2C111.37%2C175.56%2C111.37ZM26.84%2C69.31c0-23.23%2C18.25-42.07%2C40.77-42.07s40.77%2C18.84%2C40.77%2C42.07-18.26%2C42.07-40.77%2C42.07S26.84%2C92.54%2C26.84%2C69.31ZM27.27%2C0C11.54%2C0%2C0%2C12.34%2C0%2C28.58V110.9c0%2C16.24%2C11.54%2C30.83%2C27.27%2C30.83H99.57c2.17%2C0%2C4.19-1.83%2C5.4-3.7L116.47%2C118a8%2C8%2C0%2C0%2C1%2C12.52-.18l11.51%2C20.34c1.2%2C1.86%2C3.22%2C3.61%2C5.39%2C3.61h72.29c15.74%2C0%2C27.63-14.6%2C27.63-30.83V28.58C245.82%2C12.34%2C233.93%2C0%2C218.19%2C0H27.27Z%22%2F%3E%3C%2Fsvg%3E"
-          />, ubícalo en el <strong>CardBoard</strong> e inicia la
-          experiencia</span
-        >
       </div>
       <div :class="this.currentInstruction === 2 ? 'desc show' : 'desc'">
         <div class="image-container">
-          <img src="/img/tutorial/xr_scanner.png" />
-          <img src="/img/tutorial/xr_object.png" />
+          <img src="/img/tutorial/markertypes.png" style="max-width: 120%; margin: -3em; width: inherit; max-height: none;"/>
         </div>
-        <span
-          >Escanea los marcadores en las tarjetas para ver contenido en xR</span
-        >
       </div>
       <div :class="this.currentInstruction === 3 ? 'desc show' : 'desc'">
+        <span>Para interacuar debes escanear los marcadores.</span>
         <div class="image-container">
-          <img src="/img/tutorial/violet_icon.png" />
-          <img src="/img/tutorial/central_icon.png" />
-          <img src="/img/tutorial/violet_ar.png" />
+          <img src="/img/tutorial/scan.png" />
+          <img src="/img/tutorial/ar.png" />
         </div>
-        <span
-          >Utiliza el marcador central para ver a tu asistente Violet y como
-          punto de referecia...</span
-        >
       </div>
       <div :class="this.currentInstruction === 4 ? 'desc show' : 'desc'">
+        <span>Primero escanea a Violet con el marcador principal.</span>
         <div class="image-container">
-          <img src="/img/tutorial/interaction_in.gif" />
-          <img src="/img/tutorial/interaction_glow.gif" />
+          <img src="/img/tutorial/agent.png"/>
+          <img src="/img/tutorial/ar_agent.png"/>
         </div>
-        <span
-          >Aproxima una tarjeta al marcador central para indicarle a Violet qué
-          quieres seleccionarla</span
-        >
       </div>
       <div :class="this.currentInstruction === 5 ? 'desc show' : 'desc'">
+        <span>Para realizar selecciones, acerca los marcadores, guíate por las formas.</span>
         <div class="image-container">
-          <img src="/img/tutorial/interaction_glow.gif" />
-          <img src="/img/tutorial/interaction_out.gif" />
+          <img src="/img/tutorial/selection.gif" style="max-width: 120%; margin: -3em; width: inherit; max-height: none;"/>
         </div>
-        <span
-          >Aleja la tarjeta del marcador central para indicarle a Violet qué
-          quieres deseleccionarla, tambíen puedes seleccionar una del mismo
-          tipo</span
-        >
       </div>
       <div :class="this.currentInstruction === 6 ? 'desc show' : 'desc'">
+        <span>Para deseleccionar, aleja los marcadores del principal.</span>
         <div class="image-container">
-          <img src="/img/tutorial/card_1.png" />
-          <img src="/img/tutorial/card_2.png" />
-          <img src="/img/tutorial/card_3.png" />
+          <img src="/img/tutorial/deselection.gif" style="max-width: 120%; margin: -3em; width: inherit; max-height: none;"/>
         </div>
-        <span
-          >Existen 3 tipos de tarjetas: Modulos, Actividades y Opciones, podrás
-          configurarlas en ese orden</span
-        >
+      </div>
+      <div :class="this.currentInstruction === 7 ? 'desc show' : 'desc'">
+        <span>¡COMENCEMOS!</span>
+        <div class="image-container">
+          <img src="/img/tutorial/smartphone.gif"/>
+          <img src="/img/tutorial/arrow.gif"/>
+          <img src="/img/tutorial/hmd_user.png"/>
+        </div>
+        <span>Por favor gira tu celular, selecciona el ícono y ubícalo en el CardBoard.</span>
       </div>
       <div class="buttons">
-        <button
+        <!-- <button
           class="vxr-button"
           style="border: solid;background: none;"
           @click="this.skipInstruction"
         >
           Omitir
-        </button>
+        </button> -->
         <button
           class="vxr-button"
-          style="border: solid;background: none;"
+          style="background: #4d2066;"
           @click="this.nextInstruction"
         >
           {{
@@ -252,7 +232,7 @@ export default {
 
       markerOriginID: "markerOrigin",
       currentInstruction: 1,
-      totalInstructions: 7,
+      totalInstructions: 8,
 
       isModalExit: false,
       isModalExternal: false
@@ -341,10 +321,10 @@ export default {
       if (this.currentInstruction >= this.totalInstructions)
         this.$refs.instructions.classList.remove("show");
     },
-    skipInstruction: function() {
-      this.currentInstruction = this.totalInstructions;
-      this.$refs.instructions.classList.remove("show");
-    }
+    // skipInstruction: function() {
+    //   this.currentInstruction = this.totalInstructions;
+    //   this.$refs.instructions.classList.remove("show");
+    // }
   }
 };
 </script>
@@ -363,9 +343,10 @@ export default {
   left: 0;
   height: -webkit-fill-available;
   width: -webkit-fill-available;
-  background: linear-gradient(#993fcb, #4d2066);
+  /*background: linear-gradient(#993fcb, #4d2066);*/
+  background: linear-gradient(#fff, #eee);
   z-index: 10000;
-  color: white;
+  color: #4d2066;
   display: flex;
   flex-direction: column;
   justify-content: space-around;

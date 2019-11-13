@@ -18,6 +18,9 @@
       <a-entity :gltf-model="option.object" animation-mixer scale="0.25 0.25 0.25" rotation="0 180 0"></a-entity>
     </a-marker>
     <a-entity :gltf-model="travelObject" id="travelObject" scale="0.25 0.25 0.25"></a-entity>
+    <audio src="./glb/content/test/intro.mp3" ref="intro"></audio>
+    <audio src="./glb/content/test/timeout.mp3" ref="timeout"></audio>
+    <audio src="./glb/content/test/end.mp3" ref="end"></audio>
   </a-entity>
 </template>
 
@@ -51,13 +54,22 @@ export default {
     )
   },
   mounted(){
-    console.log(this.$refs)
+    this.$refs.intro.play()
+    setTimeout(()=>{
+      this.$refs.timeout.play()
+    },60000)
     this.$refs.test.addEventListener('test-item-done',()=>{
       this.itemsDone +=1;
       if(this.itemsDone>=this.options.length-1){
         console.log('you ended')
+        this.$refs.end.play()
       }
     })
+  },
+  beforeDestroy(){
+    this.$refs.intro.stop()
+    this.$refs.timeout.stop()
+    this.$refs.end.stop()
   },
   methods:{
       randomList: function(rand){

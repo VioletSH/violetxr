@@ -44,9 +44,9 @@ AFRAME.registerComponent("keep-object", {
   schema: {
     time: { type: "number", default: 250 }
   },
-  init: function() {
+  init: function () {
     var time = this.data.time;
-    this.el.addEventListener("markerLost", function() {
+    this.el.addEventListener("markerLost", function () {
       this.object3D.visible = true;
       setTimeout(() => {
         this.object3D.visible = false;
@@ -56,15 +56,18 @@ AFRAME.registerComponent("keep-object", {
 });
 
 AFRAME.registerComponent("distance-event", {
+  
   schema: {
     target: { type: "selector" },
-    distance: { type: "number", default: 1.5},
+    distance: { type: "number", default: 1.5 },
     drawLine: { default: false },
     color1: { default: "#0000ff" },
     color2: { default: "#00ff00" },
-    customDataEvent: { default: "{message:notCustomDataSet}" }
+    customDataEvent: {
+      default: '{"message":"notCustomDataSet"}',
+    }
   },
-  init: function() {
+  init: function () {
     if (this.data.drawLine) {
       var geometry = new THREE.Geometry();
       geometry.vertices.push(
@@ -82,11 +85,11 @@ AFRAME.registerComponent("distance-event", {
       this.el.object3D.add(line);
     }
   },
-  tick: function() {
+  tick: function () {
     var target = this.data.target;
     if (this.data.drawLine)
       var line = this.el.object3D.getObjectByProperty("type", "Line");
-    if (target && this.el.object3D.visible && target.object3D.visible) {
+    if (target && this.el.object3D.visible && target.object3D.visible && (target.object3D.position.length() < 10 && this.el.object3D.position.length() < 10) && (target.object3D.position.length() > 5 && this.el.object3D.position.length() > 5)) {
       //Drawing line
       if (line) {
         var position = target.object3D.position.clone();
@@ -101,28 +104,42 @@ AFRAME.registerComponent("distance-event", {
       var distance = thisPosition.distanceTo(targetPostion);
       if (
         distance <= this.data.distance &&
-        !this.el.classList.contains("selected")
+        !this.el.classList.contains("selected") &&
+        !this.el.classList.contains("pending")
       ) {
-        this.el.emit("distance-event", {
-          type: "selected",
-          data: JSON.parse(this.data.customDataEvent)
-        });
-        this.el.classList.add("selected");
-
-        line.material.color = this.data.colors.selected;
-        line.material.needsUpdate = true;
+        this.el.classList.add("pending");
+        setTimeout(() => {
+          if (distance <= this.data.distance && !this.el.classList.contains("selected") && this.el.object3D.visible && target.object3D.visible) {
+            this.el.emit("distance-event", {
+              type: "selected",
+              data: this.data.customDataEvent ? JSON.parse(this.data.customDataEvent) : ''
+            });
+            this.el.classList.add("selected");
+            line.material.color = this.data.colors.selected;
+            line.material.needsUpdate = true;
+            console.log(target.object3D.position.length(), this.el.object3D.position.length())
+          }
+          this.el.classList.remove("pending");
+        }, 750)
       } else if (
-        distance >= this.data.distance &&
-        this.el.classList.contains("selected")
+        distance > this.data.distance &&
+        this.el.classList.contains("selected") &&
+        !this.el.classList.contains("pending")
       ) {
-        this.el.classList.remove("selected");
-        this.el.emit("distance-event", {
-          type: "deselected",
-          data: JSON.parse(this.data.customDataEvent)
-        });
-
-        line.material.color = this.data.colors.standard;
-        line.material.needsUpdate = true;
+        this.el.classList.add("pending");
+        setTimeout(() => {
+          if (distance > this.data.distance && this.el.classList.contains("selected") && this.el.object3D.visible && target.object3D.visible) {
+            this.el.classList.remove("selected");
+            this.el.emit("distance-event", {
+              type: "deselected",
+              data: JSON.parse(this.data.customDataEvent)
+            });
+            line.material.color = this.data.colors.standard;
+            line.material.needsUpdate = true;
+            console.log(target.object3D.position.length(), this.el.object3D.position.length())
+          }
+          this.el.classList.remove("pending");
+        }, 750)
       }
     } else {
       if (line) {
@@ -159,9 +176,9 @@ AFRAME.registerComponent("distance-event", {
 //     //console.log(this.data.audio.currentTime,this.data.audio.duration)
 //   }
 // });
-AFRAME.registerComponent("render-event",{
-  init:function(){
-    this.el.object3D.onBeforeRender = () =>{
+AFRAME.registerComponent("render-event", {
+  init: function () {
+    this.el.object3D.onBeforeRender = () => {
       console.log('rendered')
     }
   }
@@ -172,51 +189,50 @@ AFRAME.registerComponent("test-right-to-left", {
     nextMarker: { type: "selector" },
     travelObject: { type: "selector" }
   },
-  init: function(){
+  init: function () {
   },
-  tick: function() {
-    if(this.el.classList.contains('done')&&!this.el.object3D.visible){
+  tick: function () {
+    if (this.el.classList.contains('done') && !this.el.object3D.visible) {
       this.data.travelObject.object3D.visible = false;
     }
-    if(this.data.nextMarker){
+    if (this.data.nextMarker) {
       var currentPosition = this.el.object3D.position;
       var nextPosition = this.data.nextMarker.object3D.position;
       var distance = currentPosition.distanceTo(nextPosition);
-      if(this.el.object3D.visible && this.el.classList.contains('done')){
+      if (this.el.object3D.visible && this.el.classList.contains('done')) {
         this.data.travelObject.object3D.position.copy(this.el.object3D.position)
         this.data.travelObject.object3D.visible = true;
       }
-      if(this.data.nextMarker.object3D.visible&&this.el.object3D.visible&&distance&&distance<1.5&& this.el.classList.contains('done')){
-        if(!this.el.classList.contains('ready')){
+      if (this.data.nextMarker.object3D.visible && this.el.object3D.visible && distance && distance < 1.5 && this.el.classList.contains('done')) {
+        if (!this.el.classList.contains('ready')) {
           this.startedTime = Date.now();
           this.el.classList.add('ready');
         }
-        if(this.el.classList.contains('done')){
-          let p = this.parabolicPath( this.el.object3D.position, this.data.nextMarker.object3D.position, ((Date.now()-this.startedTime+(5*1000))/1000) % 4 - 1 );
-          this.data.travelObject.object3D.position.copy( p );
-          if(nextPosition.distanceTo(p)<=0.1){
+        if (this.el.classList.contains('done')) {
+          let p = this.parabolicPath(this.el.object3D.position, this.data.nextMarker.object3D.position, ((Date.now() - this.startedTime + (5 * 1000)) / 1000) % 4 - 1);
+          this.data.travelObject.object3D.position.copy(p);
+          if (nextPosition.distanceTo(p) <= 0.1) {
             this.markAsDone();
           }
         }
       }
-      else{
+      else {
         this.el.classList.remove('ready');
       }
     }
   },
-  parabolaEvaluate: function(p0, p1, p2, t){
-    return ( 0.5*(p0 - 2*p1 + p2) )*t*t + ( -0.5*(3*p0 - 4*p1 + p2) )*t + ( p0 );
+  parabolaEvaluate: function (p0, p1, p2, t) {
+    return (0.5 * (p0 - 2 * p1 + p2)) * t * t + (-0.5 * (3 * p0 - 4 * p1 + p2)) * t + (p0);
   },
-  parabolicPath: function( pointStart, pointEnd, time )
-  {
-    let pointMiddle = new THREE.Vector3().addVectors( pointStart, pointEnd ).multiplyScalar(0.5).add( new THREE.Vector3(0,2,0) );
+  parabolicPath: function (pointStart, pointEnd, time) {
+    let pointMiddle = new THREE.Vector3().addVectors(pointStart, pointEnd).multiplyScalar(0.5).add(new THREE.Vector3(0, 2, 0));
     return new THREE.Vector3(
-      this.parabolaEvaluate( pointStart.x, pointMiddle.x, pointEnd.x, time ),
-      this.parabolaEvaluate( pointStart.y, pointMiddle.y, pointEnd.y, time ),
-      this.parabolaEvaluate( pointStart.z, pointMiddle.z, pointEnd.z, time )
-    );	
+      this.parabolaEvaluate(pointStart.x, pointMiddle.x, pointEnd.x, time),
+      this.parabolaEvaluate(pointStart.y, pointMiddle.y, pointEnd.y, time),
+      this.parabolaEvaluate(pointStart.z, pointMiddle.z, pointEnd.z, time)
+    );
   },
-  markAsDone: function(){
+  markAsDone: function () {
     this.el.classList.remove('done')
     this.data.nextMarker.classList.add('done')
     this.el.emit('test-item-done')

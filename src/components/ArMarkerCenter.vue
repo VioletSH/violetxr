@@ -1,5 +1,5 @@
 <template>
-  <a-marker type="barcode" value=0 keep-object :id="id" ref="origin">
+  <a-marker type="barcode" value=0 :id="id" ref="origin">
     <a-entity
       light="type: spot; angle: 60; intensity: 5"
       position="0.089 2.643 0.809"
@@ -146,7 +146,6 @@ export default {
   watch: {
     selectionState: function(newVal, oldVal) {
       // watch it
-      console.log(newVal,oldVal)
       if (newVal != oldVal) {
         this.$refs.origin.classList.remove("ready");
         this.modelLoaded=false

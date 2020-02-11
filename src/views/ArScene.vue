@@ -94,7 +94,7 @@
         />
         <!-- Sugerencia -->
         <a-marker
-          type="barcode" value=32
+          type="barcode" value=31
           keep-object
           v-if="this.sugerencia"
           class="sugerencia"
@@ -250,34 +250,34 @@ export default {
     this.sugerencia = this.data.cursos[0].proximaActividad;
     this.$refs.scene.addEventListener("distance-event", e => {
       console.log(e);
-      var target = e.target;
-      var data = e.detail.data;
-      var type = target.classList[0];
-      if (e.detail.type == "selected") {
-        if (type == "modulo") {
-          console.log("addedModule");
-          this.modulo = this.curso.modulos.filter(x => x.id === data.id)[0];
-        } else if (type == "actividad") {
-          this.actividad = data;
-          this.contenido = data.contenidos[0]
-        } else if (type == "sugerencia") {
-          this.actividad = data;
-          this.contenido = data.contenidos[0]
+        var target = e.target;
+        var data = e.detail.data;
+        var type = target.classList[0];
+        if (e.detail.type == "selected") {
+          if (type == "modulo") {
+            console.log("addedModule");
+            this.modulo = this.curso.modulos.filter(x => x.id === data.id)[0];
+          } else if (type == "actividad") {
+            this.actividad = data;
+            this.contenido = data.contenidos[0]
+          } else if (type == "sugerencia") {
+            this.actividad = data;
+            this.contenido = data.contenidos[0]
+          }
+        } else {
+          if (type == "modulo") {
+            this.modulo = null;
+            this.actividad = null;
+            this.contenido = null;
+          } else if (type == "actividad") {
+            this.actividad = null;
+            this.contenido = null
+          }
+          else if (type == "sugerencia") {
+            this.actividad = null;
+            this.contenido = null
+          }
         }
-      } else {
-        if (type == "modulo") {
-          this.modulo = null;
-          this.actividad = null;
-          this.contenido = null;
-        } else if (type == "actividad") {
-          this.actividad = null;
-          this.contenido = null
-        }
-        else if (type == "sugerencia") {
-          this.actividad = null;
-          this.contenido = null
-        }
-      }
     });
     //Create GUI on enter vR
     this.$refs.scene.addEventListener("enter-vr", () => {

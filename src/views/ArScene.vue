@@ -193,7 +193,7 @@
           <span class="message">Está apunto de ser redirigido a un link fuera de la aplicación, ¿desea continuar?</span>
           <div class="horizontal">
             <form :action="contenido.peticion.url" class="horizontal">
-              <button class="vxr-button" @click="isModalExternal=false">Cancelar</button>
+              <button class="vxr-button" @click="e=>{e.preventDefault();isModalExternal=false}">Cancelar</button>
               <input class="vxr-button" type="submit" value="Continuar"/>
             </form>
           </div>

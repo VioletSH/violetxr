@@ -56,7 +56,7 @@ AFRAME.registerComponent("keep-object", {
 });
 
 AFRAME.registerComponent("distance-event", {
-  
+
   schema: {
     target: { type: "selector" },
     distance: { type: "number", default: 1.5 },
@@ -84,12 +84,14 @@ AFRAME.registerComponent("distance-event", {
       var line = new THREE.Line(geometry, material);
       this.el.object3D.add(line);
     }
+    this.prevDistance = 0;
+    this.prevPendingDistance = 0;
   },
   tick: function () {
     var target = this.data.target;
     if (this.data.drawLine)
       var line = this.el.object3D.getObjectByProperty("type", "Line");
-    if (target && this.el.object3D.visible && target.object3D.visible && (target.object3D.position.length() < 10 && this.el.object3D.position.length() < 10) && (target.object3D.position.length() > 5 && this.el.object3D.position.length() > 5)) {
+    if (target && this.el.object3D.visible && target.object3D.visible && (target.object3D.position.length() < 8 && this.el.object3D.position.length() < 8) && (target.object3D.position.length() > 5 && this.el.object3D.position.length() > 5)) {
       //Drawing line
       if (line) {
         var position = target.object3D.position.clone();
@@ -102,16 +104,26 @@ AFRAME.registerComponent("distance-event", {
       var targetPostion = target.object3D.position;
       var thisPosition = this.el.object3D.position;
       var distance = thisPosition.distanceTo(targetPostion);
+      var deltaDistance = Math.abs(distance - this.prevDistance);
+      this.prevDistance = distance;
       if (
         distance <= this.data.distance &&
         !this.el.classList.contains("selected") &&
-        !this.el.classList.contains("pending")
+        !this.el.classList.contains("pending") &&
+        deltaDistance < 0.05
       ) {
         this.el.classList.add("pending");
+        this.prevPendingDistance = distance
         setTimeout(() => {
-          if (distance <= this.data.distance && !this.el.classList.contains("selected") && this.el.object3D.visible && target.object3D.visible) {
+          var targetPostion = target.object3D.position;
+          var thisPosition = this.el.object3D.position;
+          var distance = thisPosition.distanceTo(targetPostion);
+          var deltaDistance = Math.abs(distance - this.prevPendingDistance);
+          if (distance <= this.data.distance && !this.el.classList.contains("selected") && this.el.object3D.visible && target.object3D.visible && deltaDistance < 0.08) {
             this.el.emit("distance-event", {
               type: "selected",
+              distance: distance,
+              delta: deltaDistance,
               data: this.data.customDataEvent ? JSON.parse(this.data.customDataEvent) : ''
             });
             this.el.classList.add("selected");
@@ -120,18 +132,27 @@ AFRAME.registerComponent("distance-event", {
             console.log(target.object3D.position.length(), this.el.object3D.position.length())
           }
           this.el.classList.remove("pending");
-        }, 750)
+        }, 500)
       } else if (
         distance > this.data.distance &&
         this.el.classList.contains("selected") &&
         !this.el.classList.contains("pending")
+        &&
+        deltaDistance < 0.05
       ) {
         this.el.classList.add("pending");
+        this.prevPendingDistance = distance
         setTimeout(() => {
-          if (distance > this.data.distance && this.el.classList.contains("selected") && this.el.object3D.visible && target.object3D.visible) {
+          var targetPostion = target.object3D.position;
+          var thisPosition = this.el.object3D.position;
+          var distance = thisPosition.distanceTo(targetPostion);
+          var deltaDistance = Math.abs(distance - this.prevPendingDistance);
+          if (distance > this.data.distance && this.el.classList.contains("selected") && this.el.object3D.visible && target.object3D.visible && deltaDistance < 0.08) {
             this.el.classList.remove("selected");
             this.el.emit("distance-event", {
               type: "deselected",
+              distance: distance,
+              delta: deltaDistance,
               data: JSON.parse(this.data.customDataEvent)
             });
             line.material.color = this.data.colors.standard;
@@ -139,7 +160,7 @@ AFRAME.registerComponent("distance-event", {
             console.log(target.object3D.position.length(), this.el.object3D.position.length())
           }
           this.el.classList.remove("pending");
-        }, 750)
+        }, 500)
       }
     } else {
       if (line) {

@@ -14,6 +14,7 @@
     ></a-entity> 
     <template v-if="(!this.modelLoaded) && this.selectionState!=4">
       <a-entity
+        v-if="this.selectionState<3"
         id="load"
         rotation="0 0 0"
         position="0 0.25 0"
